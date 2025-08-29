@@ -1,5 +1,5 @@
 <template>
-  <h1>123</h1>
+  123
 </template>
 
 <script setup lang="ts">
