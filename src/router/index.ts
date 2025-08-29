@@ -1,11 +1,36 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+import Home from '../views/home.vue'
+const System = ()=>import('@/views/system.vue')
+const Form = ()=>import('@/views/form.vue')
+const Table = ()=>import('@/views/table.vue')
+const TableEditor = ()=>import('@/views/table-editor.vue')
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    redirect: '/system'
+  },
+  {
+    path: '/',
     name: 'home',
-    component: HomeView
+    component: Home,
+    children: [
+      {
+        path: '/system',
+        component: System
+      },
+      {
+        path: '/form',
+        component: Form
+      },
+      {
+        path: '/table',
+        component: Table
+      },
+      {
+        path: '/table-editor',
+        component: TableEditor
+      }
+    ]
   }
 ]
 
