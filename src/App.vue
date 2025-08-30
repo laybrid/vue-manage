@@ -16,6 +16,11 @@ body,
   margin: 0;
   padding: 0;
 }
-
+.container {
+	padding: 30px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
 
 </style>
