@@ -53,10 +53,25 @@ const query = reactive({
 });
 const searchOpt = ref<FormOptions[]>([
   { type: 'input', label: '用户名：', prop: 'name' },
-  { type: 'select', label: '余额', prop: 'money', placeholder: '', opts: [{ label: '120', value: '120' }, { label: '1200', value: '1200' }, { label: '300', value: '300' }] }
+  { type: 'select', label: '余额', prop: 'money', placeholder: ''}
 ])
+
+const getSelectData = async () => {
+  const res = await getTableList()
+  const selectItem = searchOpt.value.find((item) => item.type === 'select')
+  if(!selectItem){
+    return
+  }
+
+  // 去重
+  const uniqueMoneyValues = [...new Set(res.data.map((item: TableList) => item.money))]
+  selectItem.opts = uniqueMoneyValues.map(money => ({ label: money, value: money }))
+}
+getSelectData()
+
 const handleSearch = () => {
   getData({ name: query.name, money: query.money, _limit: page.pageSize })
+  page.pageNum = 1
 }
 const handleReset = () => {
   query.name = ''
@@ -64,6 +79,8 @@ const handleReset = () => {
   page.pageNum = 1
   getData({ _page: page.pageNum, _limit: page.pageSize })
 }
+
+
 // 表格数据
 const tableData = ref<TableList[]>([])
 const page = reactive({
@@ -83,7 +100,8 @@ const handleSizeChange = (size: number) => {
   // 分页的时候还要考虑顶部的搜索栏
   if (query.name && query.money) {
     getData({ _page: page.pageNum, _limit: page.pageSize, name: query.name, money: query.money })
-  } else {
+  }
+  else {
     getData({ _page: page.pageNum, _limit: page.pageSize })
   }
 }
