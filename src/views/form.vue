@@ -89,6 +89,7 @@
 <script setup lang='ts'>
 import { ref, reactive } from 'vue';
 import { FormInstance, FormRules } from 'element-plus';
+import { submitFormData } from '@/api';
 
 const labelPosition = ref('left');
 const formRef = ref<FormInstance>()
@@ -101,7 +102,6 @@ const form = reactive({
   region: '',
   date: '',
   time: '',
-  delivery: true,
   type: ['小明'],
   resource: '小红',
   desc: '',
@@ -168,7 +168,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       console.log('submit!')
-     // 验证通过之后可以把form作为json格式参数发送post请求给服务端
+      console.log(form)
+
+      // 验证通过之后可以把form作为json格式参数发送post请求给服务端
+      submitFormData(form)
     } else {
       console.log('error submit!', fields)
     }

@@ -1,0 +1,39 @@
+{
+    "userForm": [
+        {
+            "id": "1",
+            "name": "",
+            "region": "",
+            "date": "",
+            "time": "",
+            "type": [],
+            "resource": "",
+            "desc": "",
+            "options": [],
+            "color": "",
+            "num": 1,
+            "rate": 0
+        },
+        {
+            "id": "2fd9",
+            "name": "zzz",
+            "region": "小红",
+            "date": "2025-08-22T16:00:00.000Z",
+            "time": "2025-08-30T17:05:31.000Z",
+            "type": [
+                "小明",
+                "小红"
+            ],
+            "resource": "小白",
+            "desc": "zdsadasda",
+            "options": [
+                "guangdong",
+                "guangzhou",
+                "tianhe"
+            ],
+            "color": "#584896",
+            "num": 4,
+            "rate": 3.5
+        }
+    ]
+}
