@@ -10,6 +10,6 @@ export function submitFormData(form: any) {
     return axios.post("/userForm", form)
 }
 
-export function getTableList() {
-    return axios.get('/userTable')
+export function getTableList(condition?:any) {
+    return axios.get('/userTable',{ params: { ...condition } })
 }

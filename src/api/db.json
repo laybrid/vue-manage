@@ -36,28 +36,78 @@
             "rate": 3.5
         }
     ],
-    "userTable":[
+    "userTable": [
         {
             "name": "张三",
             "money": "120",
             "thumb": "https://img.yzcdn.cn/vant/ipad.png",
-            "state": "正常"
+            "state": true
+        },
+        {
+            "name": "张三",
+            "money": "120",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": true
+        },
+        {
+            "name": "张三",
+            "money": "120",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": true
+        },
+        {
+            "name": "张三",
+            "money": "120",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": true
+        },
+        {
+            "name": "张三",
+            "money": "120",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": true
         },
         {
             "name": "李四",
             "money": "520",
             "thumb": "https://img.yzcdn.cn/vant/ipad.png",
-            "state": "正常"
-        },        {
+            "state": true
+        },
+        {
             "name": "王五",
             "money": "1314",
             "thumb": "https://img.yzcdn.cn/vant/ipad.png",
-            "state": "正常"
-        },        {
+            "state": false
+        },
+        {
             "name": "赵六",
             "money": "10001",
             "thumb": "https://img.yzcdn.cn/vant/ipad.png",
-            "state": "正常"
+            "state": true
+        },
+        {
+            "name": "张三",
+            "money": "1200",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": true
+        },
+        {
+            "name": "李四",
+            "money": "5200",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": true
+        },
+        {
+            "name": "王五",
+            "money": "13140",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": false
+        },
+        {
+            "name": "赵六",
+            "money": "100010",
+            "thumb": "https://img.yzcdn.cn/vant/ipad.png",
+            "state": true
         }
     ]
 }

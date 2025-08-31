@@ -9,7 +9,7 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="search">搜索</el-button>
-                <el-button>重置</el-button>
+                <el-button @click="reset">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -19,7 +19,8 @@
 import { withDefaults,defineProps } from 'vue';
 import { SearchTableProps } from '@/types'
 const props = withDefaults(defineProps<SearchTableProps>(), {
-    search: () => {console.log('search success')}
+    search: () => {console.log('search success')},
+    reset:() => {console.log('reset success')}
 })
 
 

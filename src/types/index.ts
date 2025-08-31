@@ -17,7 +17,7 @@ export interface SearchTableProps {
     //表单配置
     options: FormOptions[],
     search?: () => void
-
+    reset?:() => void
 }
 
 // tbale-list
