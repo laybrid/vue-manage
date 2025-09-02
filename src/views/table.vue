@@ -3,7 +3,7 @@
     <table-search :query="query" :search="handleSearch" :options="searchOpt" :reset="handleReset"></table-search>
     <div class="container">
       <div style="margin-bottom: 15px;">
-        <el-button type="warning">新增</el-button>
+        <el-button type="warning" @click="addTableItem">新增</el-button>
         <el-button plain type="info">列设置</el-button>
       </div>
       <el-table :data="tableData" border table-layout="auto" :header-cell-style="{ background: '#f5f7fa' }">
@@ -20,14 +20,14 @@
           </template>
         </el-table-column>
         <el-table-column prop="operator" label="操作" align="center" width="250">
-          <template #default>
+          <template #default="{ row }">
             <el-button type="warning" size="small">
               查看
             </el-button>
-            <el-button type="primary" size="small">
+            <el-button type="primary" size="small" @click="handleEdit(row)">
               编辑
             </el-button>
-            <el-button type="danger" size="small">
+            <el-button type="danger" size="small" @click="handleDelete(row)">
               删除
             </el-button>
           </template>
@@ -36,30 +36,38 @@
       <el-pagination :current-page="page.pageNum" :page-size="page.pageSize" :background="true" :total="page.total"
         @current-change="handleSizeChange" layout="total,prev, pager, next, " style="margin-top: 20px;" />
     </div>
+    <el-dialog :title="isEdit ? '编辑' : '新增'" v-model="visible" width="700px" destroy-on-close @close="closeDialog"
+      :close-on-click-modal="false">
+      <table-edit :form-data="rowData" :options="editOpt" :edit="isEdit" :label-width="100" :span="24"
+        :update="updateData"></table-edit>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang='ts'>
 import { ref, reactive } from 'vue';
+import { ElMessageBox } from 'element-plus';
 import tableSearch from '@/components/table-search.vue';
+import tableEdit from '@/components/table-edit.vue';
 import type { FormOptions, TableList } from '@/types';
-import { getTableList } from '@/api';
+import {getTableList, deleteTableList } from '@/api';
 
 // 查询相关
 const query = reactive({
   name: '',
   money: '',
-  state: false
+  state: false,
+  thumb: ''
 });
 const searchOpt = ref<FormOptions[]>([
   { type: 'input', label: '用户名：', prop: 'name' },
-  { type: 'select', label: '余额', prop: 'money', placeholder: ''}
+  { type: 'select', label: '余额', prop: 'money', placeholder: '' }
 ])
 
 const getSelectData = async () => {
   const res = await getTableList()
   const selectItem = searchOpt.value.find((item) => item.type === 'select')
-  if(!selectItem){
+  if (!selectItem) {
     return
   }
 
@@ -113,4 +121,58 @@ const formatterMoney = (row: TableList) => {
 const indexMethod = (index: number) => {
   return (page.pageNum - 1) * page.pageSize + index + 1
 }
+
+// edit and add
+const visible = ref(false)
+const isEdit = ref(false)
+const rowData = ref<TableList>({
+  name: '',
+  money: 0,
+  thumb: '',
+  state: true
+})
+const editOpt = ref<FormOptions[]>([
+  { type: 'input', label: '用户名', prop: 'name', required: true },
+  { type: 'number', label: '账户余额', prop: 'money', required: true },
+  { type: 'switch', activeText: '正常', inactiveText: '异常', label: '账户状态', prop: 'state', required: true },
+  { type: 'upload', label: '头像', prop: 'thumb', required: true },
+])
+
+const addTableItem = () => {
+  visible.value = true;
+  rowData.value = {
+    name: '',
+    money: 0,
+    thumb: '',
+    state: true
+  }
+}
+const handleEdit = (row: TableList) => {
+  isEdit.value = true;
+  rowData.value = { ...row };
+  visible.value = true;
+}
+
+const handleDelete = (row: TableList) => {
+  ElMessageBox.confirm('确定要删除吗？', '提示', {
+    type: 'warning'
+  })
+    .then(async () => {
+      await deleteTableList(row.id);
+      getData({ _page: page.pageNum, _limit: page.pageSize });
+    })
+    .catch(() => {
+      console.log('取消删除');
+    });
+  
+}
+const updateData = () => {
+  closeDialog();
+  getData({ _page: page.pageNum, _limit: page.pageSize });
+};
+
+const closeDialog = () => {
+  visible.value = false;
+  isEdit.value = false;
+};
 </script>

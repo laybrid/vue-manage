@@ -1,30 +1,44 @@
 // search-table
 export interface FormOptions {
-    prop: 'name' | 'money' | 'state';
+    prop: 'name' | 'money' | 'state' | 'thumb'
     label: string;
     type: string;
     placeholder?: string;
     disabled?: boolean;
     required?: boolean,
-    opts?: any[]
+    opts?: any[],
+    activeValue?: any,
+    inactiveValue?: any,
+    activeText?: string,
+    inactiveText?: string
+
 }
 export interface SearchTableProps {
     query: {
         name: string,
         money: string,
-        state: boolean
+        state: boolean,
+        thumb: string
     },
     //表单配置
     options: FormOptions[],
     search?: () => void
     reset?:() => void
 }
+export interface FormEditProps {
+    options: FormOptions[],
+    formData: TableList,
+    edit:boolean,
+    update:() => void,
+    labelWidth?: number | string;
+    span?: number;
+}
 
-// tbale-list
+// table-list
 export interface TableList {
-    id: string,
+    id?: string,
     name: string,
-    money: string,
+    money: string | number,
     thumb: string,
     state: boolean
 }

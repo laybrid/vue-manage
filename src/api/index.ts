@@ -13,3 +13,15 @@ export function submitFormData(form: any) {
 export function getTableList(condition?:any) {
     return axios.get('/userTable',{ params: { ...condition } })
 }
+
+export function addTableList(form: any) {
+    return axios.post('/userTable', form)
+}
+
+export function updateTableList(form: any) {
+    return axios.put('/userTable/' + form.id, form)
+}
+
+export function deleteTableList(id: string | undefined) {
+    return axios.delete('/userTable/' + id)
+}
