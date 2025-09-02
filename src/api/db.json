@@ -40,7 +40,7 @@
     {
       "id": "1",
       "name": "张三",
-      "money": 122,
+      "money": 121,
       "thumb": "https://img.yzcdn.cn/vant/ipad.png",
       "state": true
     },
@@ -134,6 +134,13 @@
       "thumb": "",
       "state": true,
       "id": "Qqz7fiF"
+    },
+    {
+      "name": "zzz55",
+      "money": 1,
+      "thumb": "",
+      "state": false,
+      "id": "lBHGYcR"
     }
   ]
 }

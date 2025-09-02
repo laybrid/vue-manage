@@ -4,8 +4,9 @@
     <div class="container">
       <div style="margin-bottom: 15px;">
         <el-button type="warning" @click="addTableItem">新增</el-button>
-        <el-button plain type="info">列设置</el-button>
-      </div>
+        <el-button plain type="info" v-show="false">列设置</el-button>
+        <el-button plain type="text" style="float: right;" @click="handleRefresh">刷新</el-button>
+      </div> 
       <el-table :data="tableData" border table-layout="auto" :header-cell-style="{ background: '#f5f7fa' }">
         <el-table-column type="selection" width="55" align="center" />
         <el-table-column type="index" align="center" label="序号" width="65" :index="indexMethod" />
@@ -21,7 +22,7 @@
         </el-table-column>
         <el-table-column prop="operator" label="操作" align="center" width="250">
           <template #default="{ row }">
-            <el-button type="warning" size="small">
+            <el-button type="warning" size="small" @click="handleView(row)">
               查看
             </el-button>
             <el-button type="primary" size="small" @click="handleEdit(row)">
@@ -36,10 +37,15 @@
       <el-pagination :current-page="page.pageNum" :page-size="page.pageSize" :background="true" :total="page.total"
         @current-change="handleSizeChange" layout="total,prev, pager, next, " style="margin-top: 20px;" />
     </div>
+
     <el-dialog :title="isEdit ? '编辑' : '新增'" v-model="visible" width="700px" destroy-on-close @close="closeDialog"
       :close-on-click-modal="false">
       <table-edit :form-data="rowData" :options="editOpt" :edit="isEdit" :label-width="100" :span="24"
         :update="updateData"></table-edit>
+    </el-dialog>
+
+    <el-dialog title="查看详情" v-model="visible1" width="700px" destroy-on-close>
+      <table-detail :list="viewData.list" :row="viewData.row"></table-detail>
     </el-dialog>
   </div>
 </template>
@@ -49,8 +55,9 @@ import { ref, reactive } from 'vue';
 import { ElMessageBox } from 'element-plus';
 import tableSearch from '@/components/table-search.vue';
 import tableEdit from '@/components/table-edit.vue';
+import tableDetail from '@/components/table-detail.vue';
 import type { FormOptions, TableList } from '@/types';
-import {getTableList, deleteTableList } from '@/api';
+import { getTableList, deleteTableList } from '@/api';
 
 // 查询相关
 const query = reactive({
@@ -73,6 +80,7 @@ const getSelectData = async () => {
 
   // 去重
   const uniqueMoneyValues = [...new Set(res.data.map((item: TableList) => item.money))]
+  uniqueMoneyValues.sort((a: any, b: any) => a - b)
   selectItem.opts = uniqueMoneyValues.map(money => ({ label: money, value: money }))
 }
 getSelectData()
@@ -121,8 +129,11 @@ const formatterMoney = (row: TableList) => {
 const indexMethod = (index: number) => {
   return (page.pageNum - 1) * page.pageSize + index + 1
 }
-
-// edit and add
+const handleRefresh = () => {
+  getData({ _page: page.pageNum, _limit: page.pageSize })
+  getSelectData()
+}
+// edit and add and remove
 const visible = ref(false)
 const isEdit = ref(false)
 const rowData = ref<TableList>({
@@ -160,19 +171,60 @@ const handleDelete = (row: TableList) => {
     .then(async () => {
       await deleteTableList(row.id);
       getData({ _page: page.pageNum, _limit: page.pageSize });
+      getSelectData()
     })
     .catch(() => {
       console.log('取消删除');
     });
-  
+
 }
 const updateData = () => {
   closeDialog();
   getData({ _page: page.pageNum, _limit: page.pageSize });
+  getSelectData()
 };
 
 const closeDialog = () => {
   visible.value = false;
   isEdit.value = false;
+};
+
+// 查看
+const visible1 = ref(false)
+const viewData = reactive({
+  list: [] as Pick<FormOptions,'prop' | 'label'>[],
+  row: {
+    id:'',
+    name: '',
+    money: 0,
+    thumb: '',
+    state: true
+  } as TableList
+})
+const handleView = (row: TableList) => {
+  viewData.row = { ...row }
+  viewData.list = [
+    {
+      prop: 'id',
+      label: '用户ID',
+    },
+    {
+      prop: 'name',
+      label: '用户名',
+    },
+    {
+      prop: 'money',
+      label: '账户余额',
+    },
+    {
+      prop: 'state',
+      label: '账户状态',
+    },
+    {
+      prop: 'thumb',
+      label: '头像',
+    },
+  ]
+  visible1.value = true;
 };
 </script>

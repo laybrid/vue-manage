@@ -1,6 +1,6 @@
 // search-table
 export interface FormOptions {
-    prop: 'name' | 'money' | 'state' | 'thumb'
+    prop: 'name' | 'money' | 'state' | 'thumb' | 'id'
     label: string;
     type: string;
     placeholder?: string;
@@ -23,13 +23,13 @@ export interface SearchTableProps {
     //表单配置
     options: FormOptions[],
     search?: () => void
-    reset?:() => void
+    reset?: () => void
 }
 export interface FormEditProps {
     options: FormOptions[],
     formData: TableList,
-    edit:boolean,
-    update:() => void,
+    edit: boolean,
+    update: () => void,
     labelWidth?: number | string;
     span?: number;
 }
@@ -41,4 +41,10 @@ export interface TableList {
     money: string | number,
     thumb: string,
     state: boolean
+}
+
+// table-detail
+export interface TableDetailProps {
+    list: Pick<FormOptions, 'prop' | 'label'>[]
+    row: TableList
 }
