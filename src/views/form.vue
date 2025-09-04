@@ -1,15 +1,24 @@
 <template>
   <div class="container">
-    <el-radio-group v-model="labelPosition" size="large" style="margin-bottom: 20px;">
+    <el-radio-group
+      v-model="labelPosition"
+      size="large"
+      style="margin-bottom: 20px"
+    >
       <el-radio-button label="left" value="left" />
       <el-radio-button label="right" value="right" />
       <el-radio-button label="top" value="top" />
     </el-radio-group>
 
-    <el-form :label-position="labelPosition" label-width="100px" ref="formRef" :model="form" :rules="rules">
+    <el-form
+      :label-position="labelPosition"
+      label-width="100px"
+      ref="formRef"
+      :model="form"
+      :rules="rules"
+    >
       <el-row :gutter="50">
         <el-col :span="10">
-
           <el-form-item label="文本框" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
@@ -18,9 +27,12 @@
             <el-input-number :min="1" :max="10" v-model="form.num" />
           </el-form-item>
 
-
           <el-form-item label="日期选择" prop="date">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.date"></el-date-picker>
+            <el-date-picker
+              type="date"
+              placeholder="选择日期"
+              v-model="form.date"
+            ></el-date-picker>
           </el-form-item>
 
           <el-form-item label="时间选择" prop="time">
@@ -37,7 +49,10 @@
           </el-form-item>
 
           <el-form-item label="城市级联" prop="options">
-            <el-cascader v-model="form.options" :options="options"></el-cascader>
+            <el-cascader
+              v-model="form.options"
+              :options="options"
+            ></el-cascader>
           </el-form-item>
 
           <el-form-item label="文本框" prop="desc">
@@ -45,7 +60,6 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-
           <el-form-item label="评分" prop="rate">
             <el-rate allow-half v-model="form.rate" />
           </el-form-item>
@@ -73,12 +87,13 @@
               <el-radio label="小白" value="小白"></el-radio>
             </el-radio-group>
           </el-form-item>
-
         </el-col>
       </el-row>
       <el-row justify="end">
         <el-form-item>
-          <el-button type="primary" @click="submitForm(formRef)">表单提交</el-button>
+          <el-button type="primary" @click="submitForm(formRef)"
+            >表单提交</el-button
+          >
           <el-button @click="resetForm(formRef)">重置表单</el-button>
         </el-form-item>
       </el-row>
@@ -86,76 +101,76 @@
   </div>
 </template>
 
-<script setup lang='ts'>
-import { ref, reactive } from 'vue';
-import { FormInstance, FormRules } from 'element-plus';
-import { submitFormData } from '@/api';
+<script setup lang="ts">
+import { ref, reactive } from "vue";
+import { FormInstance, FormRules } from "element-plus";
+import { submitFormData } from "@/api";
 
-const labelPosition = ref('left');
-const formRef = ref<FormInstance>()
+const labelPosition = ref("left");
+const formRef = ref<FormInstance>();
 
 const rules: FormRules = {
-  name: [{ required: true, message: '请输入表单名称', trigger: 'blur' }],
+  name: [{ required: true, message: "请输入表单名称", trigger: "blur" }],
 };
 const form = reactive({
-  name: '',
-  region: '',
-  date: '',
-  time: '',
-  type: ['小明'],
-  resource: '小红',
-  desc: '',
+  name: "",
+  region: "",
+  date: "",
+  time: "",
+  type: ["小明"],
+  resource: "小红",
+  desc: "",
   options: [],
-  color: '',
+  color: "",
   num: 1,
   rate: 0,
-})
+});
 const options = [
   {
-    value: 'guangdong',
-    label: '广东省',
+    value: "guangdong",
+    label: "广东省",
     children: [
       {
-        value: 'guangzhou',
-        label: '广州市',
+        value: "guangzhou",
+        label: "广州市",
         children: [
           {
-            value: 'tianhe',
-            label: '天河区',
+            value: "tianhe",
+            label: "天河区",
           },
           {
-            value: 'haizhu',
-            label: '海珠区',
+            value: "haizhu",
+            label: "海珠区",
           },
         ],
       },
       {
-        value: 'dongguan',
-        label: '东莞市',
+        value: "dongguan",
+        label: "东莞市",
         children: [
           {
-            value: 'changan',
-            label: '长安镇',
+            value: "changan",
+            label: "长安镇",
           },
           {
-            value: 'humen',
-            label: '虎门镇',
+            value: "humen",
+            label: "虎门镇",
           },
         ],
       },
     ],
   },
   {
-    value: 'hunan',
-    label: '湖北省',
+    value: "hunan",
+    label: "湖北省",
     children: [
       {
-        value: 'wuhan',
-        label: '武汉市',
+        value: "wuhan",
+        label: "武汉市",
         children: [
           {
-            value: 'hongshan',
-            label: '洪山区',
+            value: "hongshan",
+            label: "洪山区",
           },
         ],
       },
@@ -164,22 +179,22 @@ const options = [
 ];
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
+  if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log('submit!')
-      console.log(form)
+      console.log("submit!");
+      console.log(form);
 
       // 验证通过之后可以把form作为json格式参数发送post请求给服务端
-      submitFormData(form)
+      submitFormData(form);
     } else {
-      console.log('error submit!', fields)
+      console.log("error submit!", fields);
     }
-  })
-}
+  });
+};
 
 const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  formEl.resetFields()
-}
+  if (!formEl) return;
+  formEl.resetFields();
+};
 </script>

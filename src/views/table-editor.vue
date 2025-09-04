@@ -1,9 +1,5 @@
 <template>
-  <div>
-    table-editor
-  </div>
+  <div>table-editor</div>
 </template>
 
-<script setup lang='ts'>
-
-</script>
+<script setup lang="ts"></script>

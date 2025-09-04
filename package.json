@@ -26,28 +26,14 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^7.32.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^8.10.2",
+    "eslint-plugin-prettier": "^4.2.5",
     "eslint-plugin-vue": "^8.0.3",
     "postcss": "^8.5.3",
+    "prettier": "^2.8.8",
     "tailwindcss": "^3.4.17",
     "typescript": "~4.5.5"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended",
-      "@vue/typescript/recommended"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "rules": {
-      "vue/multi-word-component-names": "off"
-    }
   },
   "browserslist": [
     "> 1%",
