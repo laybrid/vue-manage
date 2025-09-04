@@ -16,6 +16,12 @@ export const menuData = [
                 id: '11',
                 title: '表单',
                 index: '/form',
+            },
+            {
+                pid: '1',
+                id: '12',
+                title: '上传',
+                index: '/upload',
             }
         ]
     },

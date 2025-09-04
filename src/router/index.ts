@@ -4,6 +4,7 @@ const System = ()=>import('@/views/system.vue')
 const Form = ()=>import('@/views/form.vue')
 const Table = ()=>import('@/views/table.vue')
 const TableEditor = ()=>import('@/views/table-editor.vue')
+const Upload = ()=>import('@/views/upload.vue')
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -21,6 +22,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/form',
         component: Form
+      },
+      {
+        path: '/upload',
+        component: Upload
       },
       {
         path: '/table',

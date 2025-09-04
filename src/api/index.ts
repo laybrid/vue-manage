@@ -25,3 +25,8 @@ export function updateTableList(form: any) {
 export function deleteTableList(id: string | undefined) {
     return axios.delete('/userTable/' + id)
 }
+
+//文件上传base64
+export function uploadFileBase64(file: any) {
+    return axios.post('/userImg', file)
+}
