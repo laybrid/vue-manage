@@ -23,15 +23,15 @@
 </template>
 
 <script setup lang="ts">
-import { menuData } from "./menu";
-import { HomeIcon, CalendarIcon } from "@heroicons/vue/24/outline";
-import type { Component } from "vue";
+import { menuData } from './menu'
+import { HomeIcon, CalendarIcon } from '@heroicons/vue/24/outline'
+import type { Component } from 'vue'
 
 // 创建图标映射对象
 const iconMap: Record<string, Component> = {
   HomeIcon: HomeIcon,
-  CalendarIcon: CalendarIcon,
-};
+  CalendarIcon: CalendarIcon
+}
 </script>
 
 <style scoped>

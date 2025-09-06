@@ -68,41 +68,41 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
-import { FormRules, FormInstance } from "element-plus";
-import { Edit, Plus } from "@element-plus/icons-vue";
-import { FormEditProps } from "@/types";
-import { addTableList, updateTableList } from "@/api";
+import { defineProps, ref } from 'vue'
+import { FormRules, FormInstance } from 'element-plus'
+import { Edit, Plus } from '@element-plus/icons-vue'
+import { FormEditProps } from '@/types'
+import { addTableList, updateTableList } from '@/api'
 
-const props = defineProps<FormEditProps>();
+const props = defineProps<FormEditProps>()
 
 // fix 目前先不用rules
 const rules: FormRules = props.options
-  .map((item) => {
+  .map(item => {
     if (item.required) {
       return {
         [item.prop]: [
-          { required: true, message: `${item.label}不能为空`, trigger: "blur" },
-        ],
-      };
+          { required: true, message: `${item.label}不能为空`, trigger: 'blur' }
+        ]
+      }
     }
-    return {};
+    return {}
   })
-  .reduce((acc, cur) => ({ ...acc, ...cur }));
+  .reduce((acc, cur) => ({ ...acc, ...cur }))
 
 // 提交表单
-const formRef = ref<FormInstance>();
+const formRef = ref<FormInstance>()
 const saveEdit = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.validate(async (valid) => {
+  if (!formEl) return
+  formEl.validate(async valid => {
     // fix upload
     // if (!valid) return;
     props.edit
       ? await updateTableList(props.formData)
-      : await addTableList(props.formData);
-    props.update();
-  });
-};
+      : await addTableList(props.formData)
+    props.update()
+  })
+}
 </script>
 
 <style scoped>

@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import vHeader from "@/components/header.vue";
-import vSide from "@/components/side.vue";
+import vHeader from '@/components/header.vue'
+import vSide from '@/components/side.vue'
 </script>
 
 <style scoped>

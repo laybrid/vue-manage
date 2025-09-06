@@ -40,20 +40,20 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps } from "vue";
-import { SearchTableProps } from "@/types";
+import { withDefaults, defineProps } from 'vue'
+import { SearchTableProps } from '@/types'
 const props = withDefaults(defineProps<SearchTableProps>(), {
   search: () => {
-    console.log("search success");
+    console.log('search success')
   },
   reset: () => {
-    console.log("reset success");
-  },
-});
+    console.log('reset success')
+  }
+})
 
 const handleSelectChange = (value: any) => {
-  console.log("下拉框选择变化:", value);
-};
+  console.log('下拉框选择变化:', value)
+}
 </script>
 
 <style scoped>

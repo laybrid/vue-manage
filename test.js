@@ -20,4 +20,15 @@ const obj = {
 }
 const obj1 = { a: 1, b: 2 }
 
+test(a)
 const add = x => x + 1
+
+function test(a) {
+  console.log(a)
+}
+const newArr = arr.map(item => {
+  item + 1
+})
+
+new A()
+class A {}

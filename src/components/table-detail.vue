@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-import { TableDetailProps } from "@/types";
-const props = defineProps<TableDetailProps>();
+import { defineProps } from 'vue'
+import { TableDetailProps } from '@/types'
+const props = defineProps<TableDetailProps>()
 </script>

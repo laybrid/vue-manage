@@ -102,99 +102,99 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
-import { FormInstance, FormRules } from "element-plus";
-import { submitFormData } from "@/api";
+import { ref, reactive } from 'vue'
+import { FormInstance, FormRules } from 'element-plus'
+import { submitFormData } from '@/api'
 
-const labelPosition = ref("left");
-const formRef = ref<FormInstance>();
+const labelPosition = ref('left')
+const formRef = ref<FormInstance>()
 
 const rules: FormRules = {
-  name: [{ required: true, message: "请输入表单名称", trigger: "blur" }],
-};
+  name: [{ required: true, message: '请输入表单名称', trigger: 'blur' }]
+}
 const form = reactive({
-  name: "",
-  region: "",
-  date: "",
-  time: "",
-  type: ["小明"],
-  resource: "小红",
-  desc: "",
+  name: '',
+  region: '',
+  date: '',
+  time: '',
+  type: ['小明'],
+  resource: '小红',
+  desc: '',
   options: [],
-  color: "",
+  color: '',
   num: 1,
-  rate: 0,
-});
+  rate: 0
+})
 const options = [
   {
-    value: "guangdong",
-    label: "广东省",
+    value: 'guangdong',
+    label: '广东省',
     children: [
       {
-        value: "guangzhou",
-        label: "广州市",
+        value: 'guangzhou',
+        label: '广州市',
         children: [
           {
-            value: "tianhe",
-            label: "天河区",
+            value: 'tianhe',
+            label: '天河区'
           },
           {
-            value: "haizhu",
-            label: "海珠区",
-          },
-        ],
+            value: 'haizhu',
+            label: '海珠区'
+          }
+        ]
       },
       {
-        value: "dongguan",
-        label: "东莞市",
+        value: 'dongguan',
+        label: '东莞市',
         children: [
           {
-            value: "changan",
-            label: "长安镇",
+            value: 'changan',
+            label: '长安镇'
           },
           {
-            value: "humen",
-            label: "虎门镇",
-          },
-        ],
-      },
-    ],
+            value: 'humen',
+            label: '虎门镇'
+          }
+        ]
+      }
+    ]
   },
   {
-    value: "hunan",
-    label: "湖北省",
+    value: 'hunan',
+    label: '湖北省',
     children: [
       {
-        value: "wuhan",
-        label: "武汉市",
+        value: 'wuhan',
+        label: '武汉市',
         children: [
           {
-            value: "hongshan",
-            label: "洪山区",
-          },
-        ],
-      },
-    ],
-  },
-];
+            value: 'hongshan',
+            label: '洪山区'
+          }
+        ]
+      }
+    ]
+  }
+]
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
+  if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log("submit!");
-      console.log(form);
+      console.log('submit!')
+      console.log(form)
 
       // 验证通过之后可以把form作为json格式参数发送post请求给服务端
-      submitFormData(form);
+      submitFormData(form)
     } else {
-      console.log("error submit!", fields);
+      console.log('error submit!', fields)
     }
-  });
-};
+  })
+}
 
 const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
+  if (!formEl) return
+  formEl.resetFields()
+}
 </script>

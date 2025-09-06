@@ -1,48 +1,48 @@
-import { ref } from "vue";
+import { ref } from 'vue'
 export function useDarkMode() {
-  const modeState = ref(true);
+  const modeState = ref(true)
   function darkMode() {
-    if (localStorage.theme === "dark" || !("theme" in localStorage)) {
+    if (localStorage.theme === 'dark' || !('theme' in localStorage)) {
       document.documentElement.classList.add(
-        "dark",
-        "text-white",
-        "bg-[#121212]"
-      );
-      modeState.value = false;
+        'dark',
+        'text-white',
+        'bg-[#121212]'
+      )
+      modeState.value = false
     } else {
       document.documentElement.classList.remove(
-        "dark",
-        "text-white",
-        "bg-[#121212]"
-      );
-      modeState.value = true;
+        'dark',
+        'text-white',
+        'bg-[#121212]'
+      )
+      modeState.value = true
     }
 
-    localStorage.theme = "light";
+    localStorage.theme = 'light'
 
-    localStorage.theme = "dark";
+    localStorage.theme = 'dark'
 
-    localStorage.removeItem("theme");
+    localStorage.removeItem('theme')
   }
   function lightMode() {
     document.documentElement.classList.remove(
-      "dark",
-      "text-white",
-      "bg-[#121212]"
-    );
-    modeState.value = true;
+      'dark',
+      'text-white',
+      'bg-[#121212]'
+    )
+    modeState.value = true
   }
 
   function changeMode() {
     //白天状态
     if (modeState.value) {
-      darkMode();
+      darkMode()
     } else {
-      lightMode();
+      lightMode()
     }
   }
   return {
     modeState,
-    changeMode,
-  };
+    changeMode
+  }
 }
