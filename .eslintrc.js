@@ -25,6 +25,15 @@ module.exports = {
     // 'no-useless-assignment': 'warn' eslint version 9xxx,
     'new-cap': 'error',
     'prefer-const': 'error',
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'vue/v-on-event-hyphenation': 'error',
+    'vue/v-on-style': ['error', 'shorthand'],
+    'vue/v-slot-style': ['error'],
+    'vue/no-lone-template': [
+      'error',
+      {
+        ignoreAccessible: false
+      }
+    ]
   }
 }

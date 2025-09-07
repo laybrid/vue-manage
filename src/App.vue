@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 // import { MoonIcon, SunIcon,ArrowDownCircleIcon } from '@heroicons/vue/24/outline'
+const a = '1'
 </script>
 
 <style>

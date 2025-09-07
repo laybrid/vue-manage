@@ -27,7 +27,8 @@ function test(a) {
   console.log(a)
 }
 const newArr = arr.map(item => {
-  item + 1
+  // item + 1
+  return item + 1
 })
 
 new A()

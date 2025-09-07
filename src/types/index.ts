@@ -16,6 +16,7 @@ export interface FormOptions {
 }
 export interface SearchTableProps {
   query: {
+    id?: string
     name: string
     money: string
     state: boolean
