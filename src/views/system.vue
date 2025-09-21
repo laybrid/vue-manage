@@ -1,5 +1,5 @@
 <template>
-  <div>首页...123</div>
+  <div>页</div>
 </template>
 
 <script setup lang="ts"></script>
