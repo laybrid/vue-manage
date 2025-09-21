@@ -32,4 +32,21 @@ const newArr = arr.map(item => {
 })
 
 new A()
-class A {}
+class A {
+  number
+  constructor(){
+    this.number = new map()
+  }
+  add(key, value){
+    this.number.set(key, value)
+  }
+  get(key){
+    return this.number.get(key)
+  }
+  delete(key){
+    this.number.delete(key)
+  }
+  clear(){
+    this.number.clear()
+  }
+}
